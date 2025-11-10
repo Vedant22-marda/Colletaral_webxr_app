@@ -1,0 +1,15 @@
+services:
+  - type: static
+    name: webxr-frontend
+    env: static
+    staticPublishPath: ./frontend
+    buildCommand: ""
+    pullRequestPreviewsEnabled: false
+
+  - type: web
+    name: webxr-backend
+    env: python
+    buildCommand: ""
+    startCommand: "python backend/server/server.py"
+    plan: free
+    autoDeploy: true
