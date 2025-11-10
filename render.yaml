@@ -1,19 +1,17 @@
 services:
-  # --- FRONTEND (Static) ---
+  # --- FRONTEND (Static Site) ---
   - type: web
     name: webxr-frontend
     env: static
     staticPublishPath: frontend
     buildCommand: ""
-    plan: free
     autoDeploy: true
     pullRequestPreviewsEnabled: false
 
-  # --- BACKEND (Python / Flask) ---
+  # --- BACKEND (Python / Flask API) ---
   - type: web
     name: webxr-backend
     env: python
     buildCommand: ""
     startCommand: "python backend/server/server.py"
-    plan: free
     autoDeploy: true
