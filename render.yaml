@@ -1,11 +1,15 @@
 services:
-  - type: static
+  # --- FRONTEND (Static) ---
+  - type: web
     name: webxr-frontend
     env: static
-    staticPublishPath: ./frontend
+    staticPublishPath: frontend
     buildCommand: ""
+    plan: free
+    autoDeploy: true
     pullRequestPreviewsEnabled: false
 
+  # --- BACKEND (Python / Flask) ---
   - type: web
     name: webxr-backend
     env: python
