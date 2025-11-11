@@ -1,1 +1,1 @@
-web: python backend/server/server.py
+web: gunicorn backend.server.server:socketio --worker-class geventwebsocket.gunicorn.workers.GeventWebSocketWorker -b 0.0.0.0:$PORT

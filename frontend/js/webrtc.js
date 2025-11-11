@@ -1,7 +1,7 @@
 // webrtc.js — signaling for Flask-SocketIO backend
 
-// 👉 IMPORTANT: replace this with your deployed backend URL after Render deploy
-const BACKEND_URL = "https://webxr-backend.onrender.com";
+// ⚠️ ACTION REQUIRED: REPLACE THIS WITH YOUR DEPLOYED BACKEND URL (HTTPS/WSS)
+const BACKEND_URL = "https://YOUR-DEPLOYED-BACKEND-URL-HERE.com";
 const socket = io(BACKEND_URL, {
   transports: ["websocket"], // faster startup
   reconnection: true,

@@ -2,7 +2,7 @@ from flask import Flask
 from flask_socketio import SocketIO, emit, join_room
 from flask_compress import Compress
 import eventlet
-eventlet.monkey_patch()  # ensures compatibility for WebSocket handling
+eventlet.monkey_patch() # ensures compatibility for WebSocket handling
 
 # === Flask + SocketIO Setup ===
 app = Flask(__name__)
@@ -10,16 +10,16 @@ Compress(app)
 
 socketio = SocketIO(
     app,
-    cors_allowed_origins="*",
-    async_mode="eventlet",
-    ping_interval=25,      # keepalive interval (seconds)
-    ping_timeout=60,       # wait before closing dead connections
+     cors_allowed_origins="*",
+     async_mode="eventlet",
+     ping_interval=25, # keepalive interval (seconds)
+     ping_timeout=60, # wait before closing dead connections
 )
 
 @app.route("/")
 def home():
-    """Health check endpoint for Render"""
-    return {"status": "ok", "message": "WebXR backend running 🚀"}
+     """Health check endpoint for Render/Heroku"""
+     return {"status": "ok", "message": "WebXR backend running 🚀"}
 
 # === WebRTC Signaling Events ===
 @socketio.on("join")
@@ -44,6 +44,8 @@ def on_candidate(data):
     emit("candidate", data["candidate"], room=data["room"], include_self=False)
 
 # === Run Server ===
-if __name__ == "__main__":
-    print("🚀 Starting Flask-SocketIO server on port 3000")
-    socketio.run(app, host="0.0.0.0", port=3000, debug=False, use_reloader=False)
+# This block is for local testing only. 
+# It is commented out so Gunicorn (via the Procfile) can run the app in production.
+# if __name__ == "__main__":
+#     print("🚀 Starting Flask-SocketIO server on port 3000")
+#     socketio.run(app, host="0.0.0.0", port=3000, debug=False, use_reloader=False)
