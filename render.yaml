@@ -1,17 +1,18 @@
-services:
-  # --- FRONTEND (Static Site) ---
-  - type: web
-    name: webxr-frontend
-    env: static
-    staticPublishPath: frontend
-    buildCommand: ""
-    autoDeploy: true
-    pullRequestPreviewsEnabled: false
+version: "1"
 
-  # --- BACKEND (Python / Flask API) ---
-  - type: web
-    name: webxr-backend
-    env: python
+services:
+  # === Frontend: static site ===
+  - name: webxr-frontend
+    type: static_site
+    envVars: []
     buildCommand: ""
-    startCommand: "python backend/server/server.py"
+    publishPath: frontend
+    autoDeploy: true
+
+  # === Backend: Flask server ===
+  - name: webxr-backend
+    type: web_service
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: python backend/server/server.py
     autoDeploy: true
